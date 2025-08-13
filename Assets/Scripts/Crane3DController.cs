@@ -101,7 +101,7 @@ public class Crane3DController : MonoBehaviour
 
     void CreateThreeClaws()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             Transform clawCopy;
 
@@ -117,7 +117,7 @@ public class Crane3DController : MonoBehaviour
             }
 
             //120도씩 회전하여 3개 집게 배치
-            float angle = i * 120f;
+            float angle = i * 90f;
             float radians = angle * Mathf.Deg2Rad;
 
             //원 둘레에 배치하는 수학 공식
@@ -371,6 +371,21 @@ public class Crane3DController : MonoBehaviour
 
             Debug.Log("물체를 놓았습니다 : " + grabbedObject.name);
             grabbedObject = null;
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (detectionPoint != null)
+        {
+            //감지 범위 시각화
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(detectionPoint.position, detectionRadius);
+
+            //실제 체크 위치 시각화
+            Gizmos.color = Color.red;
+            Vector3 checkPosition = detectionPoint.position + Vector3.down * 0.5f;
+            Gizmos.DrawWireSphere(checkPosition, detectionRadius);
         }
     }
 }
