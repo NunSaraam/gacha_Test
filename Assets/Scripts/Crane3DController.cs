@@ -20,7 +20,7 @@ public class Crane3DController : MonoBehaviour
     public float radiusFromCenter = 0.8f;
 
     [Header("초기 위치 설정")]
-    public Vector3 initalPosition = new Vector3(0, 3, 0);       //크레인 시작 위치
+    public Vector3 initalPosition = new Vector3(0, 5, 0);       //크레인 시작 위치
 
     [Header("3D 이동 설정")]
     public float moveSpeed = 4f;            //수평 이동 속도
@@ -48,8 +48,8 @@ public class Crane3DController : MonoBehaviour
     public KeyCode openClawKey = KeyCode.X;             //집게 벌리기
 
     //내부 상태 변수들
-    private Transform[] clawPivots = new Transform[3];
-    private Transform[] lowerPivots = new Transform[3];
+    private Transform[] clawPivots = new Transform[4];
+    private Transform[] lowerPivots = new Transform[4];
     private float clawProgress = 0f;
 
     //크레인 위치
@@ -144,13 +144,13 @@ public class Crane3DController : MonoBehaviour
 
     void SetClawProgress(float progress)                //0~1 사이 값
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (clawPivots[i] != null)
             {
                 //선형 보간으로 부드러운 애니메이션 구현
                 float upperAngle = Mathf.Lerp(upperStartAngle, upperEndAngle, progress);
-                float yRotation = i * 120f;
+                float yRotation = i * 90;
                 clawPivots[i].localRotation = Quaternion.Euler(upperAngle, yRotation, 0);
             }
 
